@@ -1,61 +1,30 @@
-const http = require("http");
-const fs = require("fs");
-const path = require("path");
-const querystring = require("querystring");
+const express = require('express');
+const app = express();
 
-const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
-if (!fs.existsSync(path.join(__dirname, "db.json"))) {
-    fs.writeFileSync(
-        path.join(__dirname, "db.json"),
-        JSON.stringify({
-            products: [],
-        })
-    );
-}
+app.use(express.static('static'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-http.createServer((req, res) => {
-    switch (req.url) {
-        case "/":
-            res.writeHead(200, { "Content-Type": "text/html" });
-            res.end(html);
-            break;
-        case "/products":
-            getProducts(req, res);
-            break;
-        case "/add":
-            addProduct(req, res);
-            break;
-        default:
-            res.writeHead(404, { "Content-Type": "text/html" });
-            res.end("404 Not Found");
-            break;
-    }
-}).listen(3000, () => console.log("http://localhost:3000"));
 
-function getProducts(req, res) {
-    const products = fs.readFileSync(path.join(__dirname, "db.json"), "utf8");
+let products = []
+
+app.get('/', (req, res) => {
+    res.sendFile('index.html');
+});
+
+app.post('/ads', (req, res) => {
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(products);
-}
+    res.end(JSON.stringify(products));
+});
 
-function addProduct(req, res) {
-    let data = "";
-    req.on("data", (chunk) => {
-        data += chunk;
-    });
-    req.on("end", () => {
-        data = querystring.parse(data);
-        let products = JSON.parse(
-            fs.readFileSync(path.join(__dirname, "db.json"), "utf8")
-        );
-        products.products.push(data);
-        fs.writeFileSync(
-            path.join(__dirname, "db.json"),
-            JSON.stringify(products)
-        );
-        res.statusCode = 302;
-        res.setHeader("Location", "/");
-        res.end();
-    });
-}
+app.post('/add', (req, res) => {
+    let data = req.body;
+    data.id = products.length;
+    products.push(data);
+    res.redirect("/");
+});
+
+app.listen(3000, () => {
+    console.log('http://localhost:3000');
+});
