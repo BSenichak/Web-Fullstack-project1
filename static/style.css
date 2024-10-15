@@ -82,6 +82,18 @@ form button {
     margin-top: 1rem;
 }
 
+input[type="file"] {
+    display: none;
+}
+input[type="file"] + label {
+    background-color: var(--bg);
+    color: var(--blue);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    box-shadow: 2px 2px black;
+}
+
 
 
 .close {
