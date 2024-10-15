@@ -3,7 +3,6 @@ const app = express();
 
 
 app.use(express.static('static'));
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
@@ -20,7 +19,8 @@ app.post('/ads', (req, res) => {
 
 app.post('/add', (req, res) => {
     let data = req.body;
-    data.id = products.length;
+    console.log(data)
+    data.id = new Date().getTime();
     products.push(data);
     res.redirect("/");
 });
