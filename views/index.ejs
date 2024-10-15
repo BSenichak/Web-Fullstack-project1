@@ -1,0 +1,17 @@
+<%- include('header.ejs') -%>
+    <div class="wrapper">
+        <% products.forEach((product)=> { -%>
+            <div class="ad">
+                <h3>
+                    <%= product.title %>
+                </h3>
+                <img src="/uploads/<%= product.image %>" alt="Зображення" />
+                <p>
+                    <%= product.description %>
+                </p>
+            </div>
+            <% }); -%>
+    </div>
+    <%- include('modal.ejs') -%>
+        <button id="add">+</button>
+        <%- include('footer.ejs') -%>
