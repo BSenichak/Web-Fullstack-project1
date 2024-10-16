@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "sass": "sass --watch style.scss:static/style.css",
+    "sass": "sass --watch styles/style.scss:static/style.css",
     "dev": "concurrently \"npm run sass\" nodemon app.js"
   },
   "author": "",
