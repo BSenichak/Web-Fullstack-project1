@@ -5,15 +5,6 @@ const querystring = require("querystring");
 
 const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
 
-if (!fs.existsSync(path.join(__dirname, "db.json"))) {
-    fs.writeFileSync(
-        path.join(__dirname, "db.json"),
-        JSON.stringify({
-            products: [],
-        })
-    );
-}
-
 http.createServer((req, res) => {
     switch (req.url) {
         case "/":
@@ -34,9 +25,13 @@ http.createServer((req, res) => {
 }).listen(3000, () => console.log("http://localhost:3000"));
 
 function getProducts(req, res) {
-    const products = fs.readFileSync(path.join(__dirname, "db.json"), "utf8");
+    let products = { products: [] };
+    if (fs.existsSync(path.join(__dirname, "db.json"))) {
+        const data = fs.readFileSync(path.join(__dirname, "db.json"));
+        products = JSON.parse(data.toString());
+    }
     res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(products);
+    res.end(JSON.stringify(products));
 }
 
 function addProduct(req, res) {
@@ -46,9 +41,12 @@ function addProduct(req, res) {
     });
     req.on("end", () => {
         data = querystring.parse(data);
-        let products = JSON.parse(
-            fs.readFileSync(path.join(__dirname, "db.json"), "utf8")
-        );
+        let products = { products: [] };
+        if (fs.existsSync(path.join(__dirname, "db.json"))) {
+            products = JSON.parse(
+                fs.readFileSync(path.join(__dirname, "db.json"), "utf8")
+            );
+        }
         products.products.push(data);
         fs.writeFileSync(
             path.join(__dirname, "db.json"),
@@ -59,3 +57,4 @@ function addProduct(req, res) {
         res.end();
     });
 }
+
