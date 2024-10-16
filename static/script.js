@@ -9,7 +9,13 @@ document.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
     fetch('/add', {
         method: "POST",
-        body: new FormData(e.target) 
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: e.target.title.value,
+            description: e.target.description.value
+        })
     }).then(() => {
         location.reload();
     })
