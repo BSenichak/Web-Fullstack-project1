@@ -3,6 +3,8 @@ const app = express();
 const path = require("path");
 const multer = require("multer");
 
+const db = require("./db");
+
 app.use(express.static("static"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,26 +23,34 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-let products = [];
 
 app.get("/", (req, res) => {
-    res.render("index", { products: products });
+    db.query("SELECT * FROM products", (err, rows) => {
+        let products = rows;
+        products.forEach((product) => {
+            product.image = JSON.parse(product.image);
+        })
+        res.render("index", { products});
+    })
 });
 
 app.get("/post/:id", (req, res) => {
     const postId = req.params.id;
-    if (!products[postId]) {  
-        return res.status(404).send();
-    }
-    res.render("post", { product: products[postId] });
+    db.query("SELECT * FROM products WHERE id = ?", postId , (err, rows) => {
+        if(err) return res.status(404).end();
+        let product = rows[0];
+        product.image = JSON.parse(product.image);
+        res.render("post", { product });
+    })
 });
 
 app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
     let data = req.body;
     data.image = req.files.image.map((file) => file.filename);
-    data.id = products.length;
-    products.push(data);
-    res.end();
+    data.image = JSON.stringify(data.image);
+    db.query("INSERT INTO products SET ?", data, (err) => {
+        res.end();
+    })
 });
 
 app.listen(3000, () => {
