@@ -1,19 +1,10 @@
-@import "./colors.scss", "./post.scss", "./modal.scss";
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-}
-
-@font-face {
-    font-family: myfont;
-    src: url(assets/PressStart2P-Regular.ttf);
-}
+@import "./base/clearDefault.scss", "./base/colors.scss",
+    "./base/typography.scss", "./components/post.scss",
+    "./components/modal.scss", "./mixins.scss";
 
 body {
     background-color: $bg;
-    font-family: "Courier New", Courier, monospace;
+    font-family: $font;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -21,17 +12,22 @@ body {
 }
 
 header {
-    font-family: myfont;
-    font-size: 2rem;
+    font-family: $titleFont;
+    @include responsive-font(1rem, 2rem, 320px, 1200px);
     text-align: center;
     color: white;
     background-color: $blue;
     padding: 1rem;
     position: relative;
     text-shadow: 4px 4px black;
+    @include transparentShadow();
+    & a {
+        @include removeLinkStyle();
+    }
 }
 
 main {
+    @include responsive-container(1200px, 16px);
     flex-grow: 1;
     & .wrapper {
         display: grid;
@@ -50,35 +46,30 @@ main {
             text-shadow: 4px 4px black;
             font-size: 1.5rem;
             text-decoration: none;
+            @include transparentShadow(blue, $x: 5px);
             & img {
                 width: 100%;
                 aspect-ratio: 1/1;
                 object-fit: cover;
                 border-radius: 1rem;
             }
-        
+
             & p {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 height: 1.5rem;
             }
+            
         }
     }
 }
 
 #add {
     position: fixed;
-    bottom: 20px;
+    bottom: 4rem;
     right: 20px;
-    background-color: $blue;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-family: myfont;
-    text-shadow: 4px 4px black;
-    font-size: 1.5rem;
+    font-family: $titleFont;
+    @include buttonStyle();
 }
 
 footer {
@@ -86,6 +77,8 @@ footer {
     color: white;
     background-color: $blue;
     padding: 1rem;
+    @include transparentShadow($y: -5px);
 }
 
 
+  

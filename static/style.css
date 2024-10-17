@@ -1,3 +1,73 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul[class],
+ol[class] {
+  padding: 0;
+  list-style: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+article > * + * {
+  margin-top: 1em;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@font-face {
+  font-family: myfont;
+  src: url(assets/PressStart2P-Regular.ttf);
+}
 .post {
   display: flex;
   flex-direction: column;
@@ -61,51 +131,49 @@
   border-radius: 0.5rem;
   cursor: pointer;
   font-family: myfont;
-  text-shadow: 2px 2px black;
   font-size: 1.5rem;
+  transition: all 0.2s ease-in-out;
   margin-top: 1rem;
+}
+.modal .content form button:hover, .modal .content form button:focus {
+  box-shadow: 0 0 0.5rem #eef1f1;
 }
 .modal .content form input[type=file] {
   display: none;
 }
 .modal .content form input[type=file] + label {
+  margin-top: 1rem;
   background-color: #eef1f1;
   color: #1646ff;
-  border-radius: 1rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  box-shadow: 2px 2px black;
-}
-.modal .content .close {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  background-color: #1646ff;
-  color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
   font-family: myfont;
-  text-shadow: 4px 4px black;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+.modal .content form input[type=file] + label:hover, .modal .content form input[type=file] + label:focus {
+  box-shadow: 0 0 0.5rem #eef1f1;
+}
+.modal .content .close {
+  position: absolute;
+  right: 1rem;
+  top: 5px;
+  background-color: #eef1f1;
+  color: #1646ff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-family: myfont;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
 }
 .modal .content .close:hover, .modal .content .close:focus {
-  color: red;
-  cursor: pointer;
+  box-shadow: 0 0 0.5rem #eef1f1;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-}
-
-@font-face {
-  font-family: myfont;
-  src: url(assets/PressStart2P-Regular.ttf);
-}
 body {
   background-color: #eef1f1;
   font-family: "Courier New", Courier, monospace;
@@ -116,18 +184,51 @@ body {
 }
 
 header {
-  font-family: myfont;
-  font-size: 2rem;
+  font-family: myfont, monospace;
+  font-size: 1rem;
   text-align: center;
   color: white;
   background-color: #1646ff;
   padding: 1rem;
   position: relative;
   text-shadow: 4px 4px black;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+@media (min-width: 320px) {
+  header {
+    font-size: calc(1rem + (2rem - 1rem) * (100vw - 320px) / (1200px - 320px));
+  }
+}
+@media (min-width: 1200px) {
+  header {
+    font-size: 2rem;
+  }
+}
+header a {
+  text-decoration: none;
+  color: inherit;
 }
 
 main {
+  width: 100%;
+  max-width: 1200px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: auto;
+  margin-right: auto;
   flex-grow: 1;
+}
+@media (max-width: 768px) {
+  main {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+}
+@media (max-width: 480px) {
+  main {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
 }
 main .wrapper {
   display: grid;
@@ -147,6 +248,7 @@ main .wrapper .ad {
   text-shadow: 4px 4px black;
   font-size: 1.5rem;
   text-decoration: none;
+  box-shadow: 5px 5px 5px rgba(0, 0, 255, 0.5);
 }
 main .wrapper .ad img {
   width: 100%;
@@ -162,8 +264,9 @@ main .wrapper .ad p {
 
 #add {
   position: fixed;
-  bottom: 20px;
+  bottom: 4rem;
   right: 20px;
+  font-family: myfont, monospace;
   background-color: #1646ff;
   color: white;
   border: none;
@@ -171,8 +274,11 @@ main .wrapper .ad p {
   border-radius: 0.5rem;
   cursor: pointer;
   font-family: myfont;
-  text-shadow: 4px 4px black;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+#add:hover, #add:focus {
+  box-shadow: 0 0 0.5rem #1646ff;
 }
 
 footer {
@@ -180,6 +286,7 @@ footer {
   color: white;
   background-color: #1646ff;
   padding: 1rem;
+  box-shadow: 0 -5px 5px rgba(0, 0, 0, 0.5);
 }
 
 /*# sourceMappingURL=style.css.map */

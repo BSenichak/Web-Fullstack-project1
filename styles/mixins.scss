@@ -1,0 +1,80 @@
+@import "./base/colors.scss";
+
+@mixin responsive-container($max-width: 1200px, $padding: 16px) {
+    width: 100%;
+    max-width: $max-width;
+    padding-left: $padding;
+    padding-right: $padding;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (max-width: 768px) {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    @media (max-width: 480px) {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+}
+
+@mixin responsive-font(
+    $min-font-size,
+    $max-font-size,
+    $min-width: 320px,
+    $max-width: 1200px
+) {
+    font-size: $min-font-size;
+
+    @media (min-width: $min-width) {
+        font-size: calc(
+            #{$min-font-size} + (#{$max-font-size} - #{$min-font-size}) * ((
+                            100vw - #{$min-width}
+                        ) / (#{$max-width} - #{$min-width}))
+        );
+    }
+
+    @media (min-width: $max-width) {
+        font-size: $max-font-size;
+    }
+}
+
+@mixin transparentShadow(
+    $color: black,
+    $opacity: 0.5,
+    $x: 0,
+    $y: 5px,
+    $blur: 5px
+) {
+    box-shadow: $x $y $blur rgba($color, $opacity);
+}
+
+@mixin removeLinkStyle() {
+    text-decoration: none;
+    color: inherit;
+}
+
+@mixin buttonStyle($back: $blue, $color: white, $fs: 1rem) {
+    background-color: $back;
+    color: $color;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: myfont;
+    font-size: $fs;
+    transition: all 0.2s ease-in-out;
+    &:hover,
+    &:focus {
+        @if($back == $blue) {
+            box-shadow: 0 0 0.5rem rgba($color: $blue, $alpha: 1.0);
+        }@else{
+            box-shadow: 0 0 0.5rem rgba($color: $bg, $alpha: 1.0);
+        }
+    }
+}
+
+
+
+
