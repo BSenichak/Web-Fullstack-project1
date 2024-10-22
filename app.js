@@ -11,6 +11,7 @@ app.use(express.json());
 
 app.set("view engine", "ejs");
 app.set("views", "views");
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const storage = multer.diskStorage({
@@ -55,7 +56,6 @@ app.get("/post/:id", (req, res) => {
                 }
             })
         }
-        console.log(product)
         res.render("post", { product });
     })
 });
