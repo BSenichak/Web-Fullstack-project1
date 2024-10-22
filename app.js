@@ -36,10 +36,26 @@ app.get("/", (req, res) => {
 
 app.get("/post/:id", (req, res) => {
     const postId = req.params.id;
-    db.query("SELECT * FROM products WHERE id = ?", postId , (err, rows) => {
+    db.query(`
+    SELECT p.*, c.id AS commentId, c.author, c.comment
+    FROM products p
+    LEFT JOIN comments c ON c.postid = p.id
+    WHERE p.id = ?`, postId , (err, rows) => {
         if(err) return res.status(404).end();
-        let product = rows[0];
-        product.image = JSON.parse(product.image);
+        let product = {
+            id: rows[0].id,
+            title: rows[0].title,
+            description: rows[0].description,
+            image: JSON.parse(rows[0].image),
+            comments : rows.map((row) => {
+                return {
+                    id: row.commentId,
+                    author: row.author,
+                    comment: row.comment
+                }
+            })
+        }
+        console.log(product)
         res.render("post", { product });
     })
 });
@@ -52,6 +68,13 @@ app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
         res.end();
     })
 });
+
+app.post("/comment", (req, res) => {
+    let data = req.body;
+    db.query("INSERT INTO comments SET ?", data, (err) => {
+        res.end();
+    })
+})
 
 app.listen(3000, () => {
     console.log("http://localhost:3000");

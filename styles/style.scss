@@ -1,6 +1,6 @@
 @import "./base/clearDefault.scss", "./base/colors.scss",
     "./base/typography.scss", "./components/post.scss",
-    "./components/modal.scss", "./mixins.scss";
+    "./components/modal.scss", "./mixins.scss", "./components/commentForm.scss", "./components/commentsList.scss";
 
 body {
     background-color: $bg;
