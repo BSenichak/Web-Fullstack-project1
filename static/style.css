@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    outline: none;
 }
 
 @font-face {
@@ -10,23 +11,33 @@
 }
 
 :root {
-    --blue: #1646ff;
-    --bg: #eef1f1;
+    --primary-100: #2563eb;
+    --primary-200: #598ef3;
+    --primary-300: #d3e6fe;
+    --accent-100: #d946ef;
+    --accent-200: #fae8ff;
+    --text-100: #cbd5e1;
+    --text-200: #94a3b8;
+    --bg-100: #1e293b;
+    --bg-200: #334155;
+    --bg-300: #475569;
 }
 
 body {
-    background-color: var(--bg);
-    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--bg-100);
+    font-family: "Courier New", Courier, monospace;
 }
 
 header {
     font-family: myfont;
-    font-size: 2rem;
-    text-align: center;
+    font-size: 1rem;
     color: white;
-    background-color: var(--blue);
+    background: linear-gradient(
+        to bottom,
+        var(--primary-100),
+        var(--primary-200)
+    );
     padding: 1rem;
-    position: relative;
     text-shadow: 4px 4px black;
 }
 
@@ -53,7 +64,7 @@ form {
 }
 
 .modal-content {
-    background-color: var(--blue);
+    background: linear-gradient(to right, var(--primary-100), var(--primary-200));
     color: white;
     border-radius: 1rem;
     background-size: cover;
@@ -63,15 +74,18 @@ form {
     position: relative;
 }
 
-form input, form textarea {
+form input,
+form textarea {
     padding: 0.3rem 1rem;
     border: none;
-    border-radius: 3rem;
+    border-radius: 1rem;
 }
 
-form button {
-    background-color: var(--bg);
-    color: var(--blue);
+
+
+.add-button {
+    background-color: var(--primary-100);
+    color: white;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
@@ -80,35 +94,28 @@ form button {
     text-shadow: 2px 2px black;
     font-size: 1.5rem;
     margin-top: 1rem;
+    box-shadow: 0 0 0.5rem black;
 }
-
-
 
 .close {
     position: absolute;
-    right: 5px;
-    top: 5px;
-    background-color: var(--blue);
+    right: 1.5rem;
+    top: 1rem;
     color: white;
+    background-color: transparent;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
     cursor: pointer;
     font-family: myfont;
+    color: white;
     text-shadow: 4px 4px black;
     font-size: 1.5rem;
-}
-
-.close:hover, .close:focus {
-    color: red;
-    cursor: pointer;
 }
 
 #add {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: var(--blue);
+    background: linear-gradient(to right, var(--primary-100), var(--primary-200));
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -117,6 +124,7 @@ form button {
     font-family: myfont;
     text-shadow: 4px 4px black;
     font-size: 1.5rem;
+    box-shadow: 0 0 0.5rem black;
 }
 
 .wrapper {
@@ -127,11 +135,9 @@ form button {
 }
 
 .ad {
-    background-color: var(--blue);
+    background: linear-gradient(to right, var(--primary-100), var(--primary-200));
+    box-shadow: 0 0 0.5rem black;
     color: white;
     padding: 1rem;
     border-radius: 1rem;
 }
-
-
-
