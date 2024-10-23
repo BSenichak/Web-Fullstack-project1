@@ -30,7 +30,7 @@ http.createServer((req, res) => {
             res.end("404 Not Found");
             break;
     }
-}).listen(3000, () => console.log("http://localhost:3000"));
+}).listen(18012, () => console.log("http://localhost:18012"));
 
 function getProducts(req, res) {
     // ініціалізуємо об'єкт продуктів
