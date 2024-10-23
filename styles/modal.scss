@@ -10,7 +10,7 @@
     background-color: rgba(0, 0, 0, 0.4);
     padding-top: 60px;
     & .content {
-        background-color: $blue;
+        background: linear-gradient(to right, $primary-100, $primary-200);
         color: white;
         border-radius: 1rem;
         background-size: cover;
@@ -31,9 +31,10 @@
                 border: none;
                 border-radius: 3rem;
             }
-            & button {
-                background-color: $bg;
-                color: $blue;
+            & .add-button,
+            & .image-label {
+                background-color: $primary-100;
+                color: white;
                 border: none;
                 padding: 0.5rem 1rem;
                 border-radius: 0.5rem;
@@ -42,37 +43,27 @@
                 text-shadow: 2px 2px black;
                 font-size: 1.5rem;
                 margin-top: 1rem;
+                box-shadow: 0 0 0.5rem black;
             }
-            & input[type="file"] {
+            & #image {
                 display: none;
             }
-            & input[type="file"] + label {
-                background-color: $bg;
-                color: $blue;
-                border-radius: 1rem;
-                padding: 0.5rem;
-                cursor: pointer;
-                box-shadow: 2px 2px black;
+            & .image-label {
+                font-size: 1rem;
             }
         }
         & .close {
             position: absolute;
-            right: 5px;
-            top: 5px;
-            background-color: $blue;
+            right: 1.5rem;
+            top: 1rem;
             color: white;
+            background-color: transparent;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
             cursor: pointer;
             font-family: myfont;
+            color: white;
             text-shadow: 4px 4px black;
             font-size: 1.5rem;
-            &:hover,
-            &:focus {
-                color: red;
-                cursor: pointer;
-            }
         }
     }
 }

@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
+    outline: none;
 }
 
 @font-face {
@@ -12,23 +13,24 @@
 }
 
 body {
-    background-color: $bg;
+    background-color: $bg-100;
     font-family: "Courier New", Courier, monospace;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    min-height: 100vh;
 }
 
 header {
     font-family: myfont;
-    font-size: 2rem;
-    text-align: center;
+    font-size: 1rem;
     color: white;
-    background-color: $blue;
+    background: linear-gradient(to bottom, $primary-100, $primary-200);
     padding: 1rem;
-    position: relative;
     text-shadow: 4px 4px black;
+    & a {
+        color: white;
+        text-decoration: none;
+    }
 }
 
 main {
@@ -36,27 +38,23 @@ main {
     & .wrapper {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 1rem;
         padding: 1rem;
         & .ad {
-            background-color: $blue;
+            background: linear-gradient(to right, $primary-100, $primary-200);
+            box-shadow: 0 0 0.5rem black;
             color: white;
             padding: 1rem;
             border-radius: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            text-shadow: 4px 4px black;
-            font-size: 1.5rem;
             text-decoration: none;
             & img {
                 width: 100%;
+                border-radius: 1rem;
                 aspect-ratio: 1/1;
                 object-fit: cover;
-                border-radius: 1rem;
+                object-position: center;
             }
-        
+
             & p {
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -70,7 +68,7 @@ main {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: $blue;
+    background: linear-gradient(to right, $primary-100, $primary-200);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -79,13 +77,16 @@ main {
     font-family: myfont;
     text-shadow: 4px 4px black;
     font-size: 1.5rem;
+    box-shadow: 0 0 0.5rem black;
 }
 
 footer {
-    text-align: center;
+    background: linear-gradient(
+        to bottom,
+        $primary-100,
+        $primary-200
+    );
     color: white;
-    background-color: $blue;
-    padding: 1rem;
+    text-align: center;
+    padding: 0.3rem;
 }
-
-
