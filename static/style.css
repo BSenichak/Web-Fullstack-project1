@@ -41,6 +41,22 @@ header {
     text-shadow: 4px 4px black;
 }
 
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.ad {
+    background: linear-gradient(to right, var(--primary-100), var(--primary-200));
+    box-shadow: 0 0 0.5rem black;
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+
 form {
     display: flex;
     flex-direction: column;
@@ -80,8 +96,6 @@ form textarea {
     border: none;
     border-radius: 1rem;
 }
-
-
 
 .add-button {
     background-color: var(--primary-100);
@@ -127,17 +141,5 @@ form textarea {
     box-shadow: 0 0 0.5rem black;
 }
 
-.wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
-}
 
-.ad {
-    background: linear-gradient(to right, var(--primary-100), var(--primary-200));
-    box-shadow: 0 0 0.5rem black;
-    color: white;
-    padding: 1rem;
-    border-radius: 1rem;
-}
+
