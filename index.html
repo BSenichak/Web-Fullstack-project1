@@ -57,10 +57,13 @@
         <button type="submit">Add</button>
     </form>
     <script>
+        // надсилаємо запит на сервер щоб отримати список продуктів
         fetch("/products", {
             method: "post",
         }).then(async (response) => {
+            // отримуємо дані з сервера
             let products = await response.json();
+            // додаємо до сторінки кожен продукт
             products.products.forEach((product) => {
                 document.querySelector(".wrapper").innerHTML += `
                 <div class="product">
