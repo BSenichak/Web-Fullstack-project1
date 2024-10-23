@@ -1,10 +1,8 @@
 const express = require('express');
 const app = express();
 
-
 app.use(express.static('static'));
 app.use(express.json());
-
 
 let products = []
 
@@ -19,8 +17,6 @@ app.post('/ads', (req, res) => {
 
 app.post('/add', (req, res) => {
     let data = req.body;
-    console.log(data)
-    data.id = new Date().getTime();
     products.push(data);
     res.redirect("/");
 });
