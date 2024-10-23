@@ -3,55 +3,46 @@
     "./components/modal.scss", "./mixins.scss";
 
 body {
-    background-color: $bg;
-    font-family: $font;
-    min-height: 100vh;
+    background-color: $bg-100;
+    font-family: "Courier New", Courier, monospace;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    min-height: 100vh;
 }
 
 header {
-    font-family: $titleFont;
-    @include responsive-font(1rem, 2rem, 320px, 1200px);
-    text-align: center;
+    font-family: myfont;
+    font-size: 1rem;
     color: white;
-    background-color: $blue;
+    background: linear-gradient(to bottom, $primary-100, $primary-200);
     padding: 1rem;
-    position: relative;
     text-shadow: 4px 4px black;
-    @include transparentShadow();
     & a {
         @include removeLinkStyle();
     }
 }
 
 main {
-    @include responsive-container(1200px, 16px);
+    @include responsive-container();
     flex-grow: 1;
     & .wrapper {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 1rem;
         padding: 1rem;
         & .ad {
-            background-color: $blue;
+            background: linear-gradient(to right, $primary-100, $primary-200);
+            box-shadow: 0 0 0.5rem black;
+            @include removeLinkStyle();
             color: white;
             padding: 1rem;
             border-radius: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            text-shadow: 4px 4px black;
-            font-size: 1.5rem;
-            text-decoration: none;
-            @include transparentShadow(blue, $x: 5px);
             & img {
                 width: 100%;
+                border-radius: 1rem;
                 aspect-ratio: 1/1;
                 object-fit: cover;
-                border-radius: 1rem;
+                object-position: center;
             }
 
             & p {
@@ -59,26 +50,25 @@ main {
                 text-overflow: ellipsis;
                 height: 1.5rem;
             }
-            
         }
     }
 }
 
 #add {
     position: fixed;
-    bottom: 4rem;
+    bottom: 20px;
     right: 20px;
-    font-family: $titleFont;
     @include buttonStyle();
+    @include transparentShadow();
 }
 
 footer {
-    text-align: center;
+    background: linear-gradient(
+        to bottom,
+        $primary-100,
+        $primary-200
+    );
     color: white;
-    background-color: $blue;
-    padding: 1rem;
-    @include transparentShadow($y: -5px);
+    text-align: center;
+    padding: 0.3rem;
 }
-
-
-  
