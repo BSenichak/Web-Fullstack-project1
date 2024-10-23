@@ -1,4 +1,4 @@
-@import "./base/colors.scss";
+@import "base/colors.scss";
 
 @mixin responsive-container($max-width: 1200px, $padding: 16px) {
     width: 100%;
@@ -19,26 +19,6 @@
     }
 }
 
-@mixin responsive-font(
-    $min-font-size,
-    $max-font-size,
-    $min-width: 320px,
-    $max-width: 1200px
-) {
-    font-size: $min-font-size;
-
-    @media (min-width: $min-width) {
-        font-size: calc(
-            #{$min-font-size} + (#{$max-font-size} - #{$min-font-size}) * ((
-                            100vw - #{$min-width}
-                        ) / (#{$max-width} - #{$min-width}))
-        );
-    }
-
-    @media (min-width: $max-width) {
-        font-size: $max-font-size;
-    }
-}
 
 @mixin transparentShadow(
     $color: black,
@@ -55,24 +35,18 @@
     color: inherit;
 }
 
-@mixin buttonStyle($back: $blue, $color: white, $fs: 1rem) {
-    background-color: $back;
-    color: $color;
+
+@mixin buttonStyle() {
+    background: linear-gradient(to right, $primary-100, $primary-200);
+    color: white;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
     font-family: myfont;
-    font-size: $fs;
-    transition: all 0.2s ease-in-out;
-    &:hover,
-    &:focus {
-        @if($back == $blue) {
-            box-shadow: 0 0 0.5rem rgba($color: $blue, $alpha: 1.0);
-        }@else{
-            box-shadow: 0 0 0.5rem rgba($color: $bg, $alpha: 1.0);
-        }
-    }
+    text-shadow: 4px 4px black;
+    font-size: 1.5rem;
+    box-shadow: 0 0 0.5rem black;
 }
 
 
