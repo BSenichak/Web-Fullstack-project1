@@ -1,0 +1,13 @@
+@import "../base/typography.scss";
+
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    color: white;
+    font-size: 2rem;
+    font-family: $titleFont;
+    text-shadow: 4px 4px black;
+}
