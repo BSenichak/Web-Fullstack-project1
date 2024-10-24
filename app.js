@@ -49,6 +49,7 @@ app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
     data.image = req.files.image.map((file) => file.filename);
     data.image = JSON.stringify(data.image);
     db.query("INSERT INTO products SET ?", data, (err) => {
+        res.status(201);
         res.end();
     })
 });
