@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 app.get("/post/:id", (req, res) => {
     const postId = req.params.id;
     db.query("SELECT * FROM products WHERE id = ?", postId , (err, rows) => {
-        if(err) return res.status(404).end();
+        if(err || rows.length === 0) return res.status(404).render("notfound");
         let product = rows[0];
         product.image = JSON.parse(product.image);
         res.render("post", { product });
@@ -53,6 +53,11 @@ app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
         res.end();
     })
 });
+
+app.use((req, res, next) => {
+    res.status(404);
+    res.render('notfound');
+})
 
 app.listen(3000, () => {
     console.log("http://localhost:3000");
