@@ -7,6 +7,7 @@ app.use(express.json());
 let products = []
 
 app.get('/', (req, res) => {
+    res.writeHead(200, { "Content-Type": "text/html" });
     res.sendFile('index.html');
 });
 
@@ -18,6 +19,7 @@ app.post('/ads', (req, res) => {
 app.post('/add', (req, res) => {
     let data = req.body;
     products.push(data);
+    res.status(200);
     res.redirect("/");
 });
 
