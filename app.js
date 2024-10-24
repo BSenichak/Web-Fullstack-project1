@@ -14,8 +14,9 @@ app.get('/', (req, res) => {
 });
 
 app.post('/ads', (req, res) => {
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(products));
+    res.status(200);
+    res.setHeader('Content-Type', 'application/json');
+    res.json(products).end();
 });
 
 app.post('/add', (req, res) => {
