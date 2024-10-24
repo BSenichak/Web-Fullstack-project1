@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
 
 app.get("/post/:id", (req, res) => {
     const postId = req.params.id;
-    if (!products[postId]) {  
+    if (!products[postId]) {
         return res.status(404).send();
     }
     res.render("post", { product: products[postId] });
@@ -40,6 +40,7 @@ app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
     data.image = req.files.image.map((file) => file.filename);
     data.id = products.length;
     products.push(data);
+    res.status(201);
     res.end();
 });
 
