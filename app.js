@@ -42,7 +42,7 @@ app.get("/post/:id", (req, res) => {
     FROM products p
     LEFT JOIN comments c ON c.postid = p.id
     WHERE p.id = ?`, postId , (err, rows) => {
-        if(err) return res.status(404).end();
+        if(err || rows.length == 0) return res.status(404).render("notfound");
         let product = {
             id: rows[0].id,
             title: rows[0].title,
@@ -76,6 +76,11 @@ app.post("/comment", (req, res) => {
         res.status(201);
         res.end();
     })
+})
+
+app.use((req, res, next) => {
+    res.status(404);
+    res.render('notfound');
 })
 
 app.listen(3000, () => {

@@ -306,6 +306,22 @@ select {
   font-weight: bold;
 }
 
+@font-face {
+  font-family: myfont;
+  src: url(assets/PressStart2P-Regular.ttf);
+}
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  color: white;
+  font-size: 2rem;
+  font-family: myfont, monospace;
+  text-shadow: 4px 4px black;
+}
+
 body {
   background-color: #1e293b;
   font-family: "Courier New", Courier, monospace;

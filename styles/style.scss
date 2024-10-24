@@ -1,7 +1,7 @@
 @import "./base/clearDefault.scss", "./base/colors.scss",
     "./base/typography.scss", "./components/post.scss",
     "./components/modal.scss", "./mixins.scss", "./components/commentForm.scss",
-    "./components/commentsList.scss";
+    "./components/commentsList.scss", "./components/notfound.scss";
 
 body {
     background-color: $bg-100;
