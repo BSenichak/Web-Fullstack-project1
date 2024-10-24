@@ -40,6 +40,7 @@ app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
     data.image = req.files.image.map((file) => file.filename);
     data.id = products.length;
     products.push(data);
+    res.status(201)
     res.end();
 });
 
