@@ -22,6 +22,12 @@ app.post('/add', (req, res) => {
     res.end()
 });
 
+
+app.use((req, res, next) => {
+    res.status(404);
+    res.render('notfound');
+})
+
 app.listen(3000, () => {
     console.log('http://localhost:3000');
 });
