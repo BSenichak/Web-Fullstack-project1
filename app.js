@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 app.post('/add', (req, res) => {
     let data = req.body;
     products.push(data);
+    res.status(201)
     res.end()
 });
 
