@@ -142,4 +142,17 @@ form textarea {
 }
 
 
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+    font-size: 2rem;
+    font-family: myfont;
+    text-shadow: 4px 4px black;
+}
+
+
 
