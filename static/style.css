@@ -172,4 +172,16 @@ footer {
   padding: 0.3rem;
 }
 
+.notFound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  color: white;
+  font-size: 2rem;
+  font-family: myfont;
+  text-shadow: 4px 4px black;
+}
+
 /*# sourceMappingURL=style.css.map */

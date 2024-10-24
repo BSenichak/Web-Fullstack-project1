@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 app.get("/post/:id", (req, res) => {
     const postId = req.params.id;
     if (!products[postId]) {
-        return res.status(404).send();
+        return res.status(404).render("notfound");
     }
     res.render("post", { product: products[postId] });
 });
@@ -43,6 +43,11 @@ app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
     res.status(201);
     res.end();
 });
+
+app.use((req, res, next) => {
+    res.status(404);
+    res.render('notfound');
+})
 
 app.listen(3000, () => {
     console.log("http://localhost:3000");
