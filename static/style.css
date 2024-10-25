@@ -1,3 +1,73 @@
+@font-face {
+  font-family: myfont;
+  src: url(assets/PressStart2P-Regular.ttf);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ul[class],
+ol[class] {
+  padding: 0;
+  list-style: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+article > * + * {
+  margin-top: 1em;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 .post {
   color: white;
   display: flex;
@@ -60,7 +130,7 @@
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  font-family: myfont;
+  font-family: myfont, monospace;
   text-shadow: 2px 2px black;
   font-size: 1.5rem;
   margin-top: 1rem;
@@ -80,24 +150,12 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-family: myfont;
+  font-family: myfont, monospace;
   color: white;
   text-shadow: 4px 4px black;
   font-size: 1.5rem;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  text-decoration: none;
-  outline: none;
-}
-
-@font-face {
-  font-family: myfont;
-  src: url(assets/PressStart2P-Regular.ttf);
-}
 body {
   background-color: #1e293b;
   font-family: "Courier New", Courier, monospace;
@@ -107,7 +165,7 @@ body {
 }
 
 header {
-  font-family: myfont;
+  font-family: myfont, monospace;
   font-size: 1rem;
   color: white;
   background: linear-gradient(to bottom, #2563eb, #598ef3);
@@ -159,7 +217,7 @@ main .wrapper .ad p {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  font-family: myfont;
+  font-family: myfont, monospace;
   text-shadow: 4px 4px black;
   font-size: 1.5rem;
   box-shadow: 0 0 0.5rem black;
@@ -180,7 +238,7 @@ footer {
   flex-grow: 1;
   color: white;
   font-size: 2rem;
-  font-family: myfont;
+  font-family: myfont, monospace;
   text-shadow: 4px 4px black;
 }
 

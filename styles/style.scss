@@ -1,27 +1,16 @@
-@import "./colors.scss", "./post.scss", "./modal.scss";
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-    outline: none;
-}
-
-@font-face {
-    font-family: myfont;
-    src: url(assets/PressStart2P-Regular.ttf);
-}
+@import "./base/colors.scss", "./base/typography.scss",
+    "./base/clearDefault.scss", "./post.scss", "./components/modal.scss";
 
 body {
     background-color: $bg-100;
-    font-family: "Courier New", Courier, monospace;
+    font-family: $font;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
 header {
-    font-family: myfont;
+    font-family: $titleFont;
     font-size: 1rem;
     color: white;
     background: linear-gradient(to bottom, $primary-100, $primary-200);
@@ -74,18 +63,14 @@ main {
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     cursor: pointer;
-    font-family: myfont;
+    font-family: $titleFont;
     text-shadow: 4px 4px black;
     font-size: 1.5rem;
     box-shadow: 0 0 0.5rem black;
 }
 
 footer {
-    background: linear-gradient(
-        to bottom,
-        $primary-100,
-        $primary-200
-    );
+    background: linear-gradient(to bottom, $primary-100, $primary-200);
     color: white;
     text-align: center;
     padding: 0.3rem;
@@ -99,6 +84,6 @@ footer {
     flex-grow: 1;
     color: white;
     font-size: 2rem;
-    font-family: myfont;
+    font-family: $titleFont;
     text-shadow: 4px 4px black;
 }

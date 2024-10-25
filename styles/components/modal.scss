@@ -39,7 +39,7 @@
                 padding: 0.5rem 1rem;
                 border-radius: 0.5rem;
                 cursor: pointer;
-                font-family: myfont;
+                font-family: $titleFont;
                 text-shadow: 2px 2px black;
                 font-size: 1.5rem;
                 margin-top: 1rem;
@@ -60,7 +60,7 @@
             background-color: transparent;
             border: none;
             cursor: pointer;
-            font-family: myfont;
+            font-family: $titleFont;
             color: white;
             text-shadow: 4px 4px black;
             font-size: 1.5rem;
