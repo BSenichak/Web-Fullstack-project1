@@ -1,7 +1,12 @@
-@import "./base/clearDefault.scss", "./base/colors.scss",
-    "./base/typography.scss", "./components/post.scss",
-    "./components/modal.scss", "./mixins.scss", "./components/commentForm.scss",
-    "./components/commentsList.scss", "./components/notfound.scss";
+@use "./base/functions" as f;
+@import "./base/clearDefault", "./base/colors", "./base/typography",
+    "./base/mixins";
+@import "./components/post", "./components/modal", "./components/notfound", 
+    "./components/commentForm", "./components/commentsList";
+
+@debug f.calculateSpacing(10, 10);
+@debug f.pow(2, 3);
+@debug f.randomColor();
 
 body {
     background-color: $bg-100;
@@ -9,6 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    @include niceScrollbars();
 }
 
 header {
@@ -25,7 +31,9 @@ header {
 
 main {
     @include responsive-container();
-    flex-grow: 1;
+    & {
+        flex-grow: 1;
+    }
     & .wrapper {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -47,10 +55,9 @@ main {
             }
 
             & p {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                height: 1.5rem;
+                @include ellipsisText();
             }
+            @include adaptElement($max-width: 768px, $padding: 8px);
         }
     }
 }
@@ -64,11 +71,7 @@ main {
 }
 
 footer {
-    background: linear-gradient(
-        to bottom,
-        $primary-100,
-        $primary-200
-    );
+    background: linear-gradient(to bottom, $primary-100, $primary-200);
     color: white;
     text-align: center;
     padding: 0.3rem;
