@@ -1,12 +1,12 @@
-@import "../mixins.scss";
-
 .post {
     @include responsive-container();
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    & {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
     & .imgs {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -19,5 +19,8 @@
             border-radius: 1rem;
             @include transparentShadow();
         }
+    }
+    & p {
+        white-space: pre-line;
     }
 }
