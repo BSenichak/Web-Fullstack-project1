@@ -1,0 +1,24 @@
+@import "../base/clearDefault.scss", "../base/colors.scss";
+
+#comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin: 2rem 0;
+    & textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+    & button {
+        @include buttonStyle();
+    }
+
+    & input,
+    & textarea {
+        padding: 0.3rem 1rem;
+        border: none;
+        border-radius: 1rem;
+    }
+
+}

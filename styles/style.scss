@@ -1,0 +1,78 @@
+@use "./base/functions" as f;
+@import "./base/clearDefault", "./base/colors", "./base/typography",
+    "./base/mixins";
+@import "./components/post", "./components/modal", "./components/notfound", 
+    "./components/commentForm", "./components/commentsList";
+
+@debug f.calculateSpacing(10, 10);
+@debug f.pow(2, 3);
+@debug f.randomColor();
+
+body {
+    background-color: $bg-100;
+    font-family: "Courier New", Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    @include niceScrollbars();
+}
+
+header {
+    font-family: myfont;
+    font-size: 1rem;
+    color: white;
+    background: linear-gradient(to bottom, $primary-100, $primary-200);
+    padding: 1rem;
+    text-shadow: 4px 4px black;
+    & a {
+        @include removeLinkStyle();
+    }
+}
+
+main {
+    @include responsive-container();
+    & {
+        flex-grow: 1;
+    }
+    & .wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+        & .ad {
+            background: linear-gradient(to right, $primary-100, $primary-200);
+            box-shadow: 0 0 0.5rem black;
+            @include removeLinkStyle();
+            color: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            & img {
+                width: 100%;
+                border-radius: 1rem;
+                aspect-ratio: 1/1;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            & p {
+                @include ellipsisText();
+            }
+            @include adaptElement($max-width: 768px, $padding: 8px);
+        }
+    }
+}
+
+#add {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    @include buttonStyle();
+    @include transparentShadow();
+}
+
+footer {
+    background: linear-gradient(to bottom, $primary-100, $primary-200);
+    color: white;
+    text-align: center;
+    padding: 0.3rem;
+}

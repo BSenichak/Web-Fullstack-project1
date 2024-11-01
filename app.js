@@ -1,87 +1,88 @@
-// модулі для роботи з http, файловою системою, path, та querystring
-const http = require("http");
-const fs = require("fs");
+const express = require("express");
+const app = express();
 const path = require("path");
-const querystring = require("querystring");
+const multer = require("multer");
 
-// функція що читає файл з html
-const html = fs.readFileSync(path.join(__dirname, "index.html"), "utf8");
+const db = require("./db");
 
-// функція що створює http сервер
-http.createServer((req, res) => {
-    // обробка запитів
-    switch (req.url) {
-        // запит на головну сторінку
-        case "/":
-            res.writeHead(200, { "Content-Type": "text/html" });
-            res.end(html);
-            break;
-        // запит на список продуктів
-        case "/products":
-            getProducts(req, res);
-            break;
-        // запит на додавання продукту
-        case "/add":
-            addProduct(req, res);
-            break;
-        default:
-            // запит на якусь іншу сторінку
-            res.writeHead(404, { "Content-Type": "text/html" });
-            res.end("404 Not Found");
-            break;
-    }
-}).listen(5500, () => console.log("http://localhost:5500"));
+app.use(express.static("static"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-function getProducts(req, res) {
-    // ініціалізуємо об'єкт продуктів
-    let products = { products: [] };
+app.set("view engine", "ejs");
+app.set("views", "views");
 
-    // перевіряємо чи існує файл db.json
-    if (fs.existsSync(path.join(__dirname, "db.json"))) {
-        // читаємо дані з файлу
-        const data = fs.readFileSync(path.join(__dirname, "db.json"));
-        // парсимо дані в об'єкт
-        products = JSON.parse(data.toString());
-    }
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-    // встановлюємо заголовок відповіді
-    res.writeHead(200, { "Content-Type": "application/json" });
-    // відправляємо відповідь з продуктами
-    res.end(JSON.stringify(products));
-}
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/");
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    },
+});
+const upload = multer({ storage: storage });
 
 
-function addProduct(req, res) {
-    let data = "";
-    req.on("data", (chunk) => {
-        data += chunk;
-    });
-    req.on("end", () => {
-        // парсимо дані з форми
-        data = querystring.parse(data);
+app.get("/", (req, res) => {
+    db.query("SELECT * FROM products", (err, rows) => {
+        let products = rows;
+        products.forEach((product) => {
+            product.image = JSON.parse(product.image);
+        })
+        res.render("index", { products});
+    })
+});
 
-        // отримуємо всі продукти
-        let products = { products: [] };
-        if (fs.existsSync(path.join(__dirname, "db.json"))) {
-            products = JSON.parse(
-                fs.readFileSync(path.join(__dirname, "db.json"), "utf8")
-            );
+app.get("/post/:id", (req, res) => {
+    const postId = req.params.id;
+    db.query(`
+    SELECT p.*, c.id AS commentId, c.author, c.comment
+    FROM products p
+    LEFT JOIN comments c ON c.postid = p.id
+    WHERE p.id = ?`, postId , (err, rows) => {
+        if(err || rows.length == 0) return res.status(404).render("notfound");
+        let product = {
+            id: rows[0].id,
+            title: rows[0].title,
+            description: rows[0].description,
+            image: JSON.parse(rows[0].image),
+            comments : rows.map((row) => {
+                return {
+                    id: row.commentId,
+                    author: row.author,
+                    comment: row.comment
+                }
+            })
         }
+        res.render("post", { product });
+    })
+});
 
-        // додаємо новий продукт
-        products.products.push(data);
-
-        // зберігаємо всі продукти
-        fs.writeFileSync(
-            path.join(__dirname, "db.json"),
-            JSON.stringify(products)
-        );
-
-        // перенаправляємо на головну сторінку
-        res.statusCode = 302;
-        res.setHeader("Location", "/");
+app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
+    let data = req.body;
+    data.image = req.files.image.map((file) => file.filename);
+    data.image = JSON.stringify(data.image);
+    db.query("INSERT INTO products SET ?", data, (err) => {
+        res.status(201);
         res.end();
-    });
-}
+    })
+});
 
+app.post("/comment", (req, res) => {
+    let data = req.body;
+    db.query("INSERT INTO comments SET ?", data, (err) => {
+        res.status(201);
+        res.end();
+    })
+})
 
+app.use((req, res, next) => {
+    res.status(404);
+    res.render('notfound');
+})
+
+app.listen(3000, () => {
+    console.log("http://localhost:3000");
+});

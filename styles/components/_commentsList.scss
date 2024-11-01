@@ -1,0 +1,32 @@
+@import "../base/colors.scss";
+
+.commentList {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    & h2 {
+        font-size: 1.5rem;
+    }
+    & ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    & li {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        background: linear-gradient(to right, $primary-100, $primary-200);
+        color: white;
+        padding: 1rem;
+        border-radius: 1rem;
+        & .author {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    }
+}
