@@ -37,10 +37,11 @@ app.get("/", (req, res) => {
 
 app.get("/post/:id", (req, res) => {
     const postId = req.params.id;
+    console.log(postId)
     db.query(`
     SELECT p.*, c.id AS commentId, c.author, c.comment
     FROM products p
-    LEFT JOIN comments c ON c.postid = p.id
+    LEFT JOIN shopcomments c ON c.postid = p.id
     WHERE p.id = ?`, postId , (err, rows) => {
         if(err || rows.length == 0) return res.status(404).render("notfound");
         let product = {
@@ -72,7 +73,7 @@ app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
 
 app.post("/comment", (req, res) => {
     let data = req.body;
-    db.query("INSERT INTO comments SET ?", data, (err) => {
+    db.query("INSERT INTO shopcomments SET ?", data, (err) => {
         res.status(201);
         res.end();
     })

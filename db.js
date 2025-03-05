@@ -32,7 +32,7 @@ const connection = mysql.createConnection({
                     image TEXT
                 )`;
                 const createCommentsTable = `
-                CREATE TABLE IF NOT EXISTS comments (
+                CREATE TABLE IF NOT EXISTS shopcomments (
                     id INT AUTO_INCREMENT PRIMARY KEY,
                     postid INT,
                     author VARCHAR(255),
