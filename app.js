@@ -61,6 +61,9 @@ app.get("/post/:id", (req, res) => {
     })
 });
 
+
+
+
 app.post("/add", upload.fields([{ name: "image" }]), (req, res) => {
     let data = req.body;
     data.image = req.files.image.map((file) => file.filename);
