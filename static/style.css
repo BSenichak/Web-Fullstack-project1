@@ -264,7 +264,6 @@ main .wrapper .ad {
   color: white;
   padding: 1rem;
   border-radius: 1rem;
-  width: 100%;
 }
 main .wrapper .ad img {
   width: 100%;
@@ -280,6 +279,9 @@ main .wrapper .ad p {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+}
+main .wrapper .ad {
+  width: 100%;
 }
 @media (min-width: 769px) and (max-width: 768px) {
   main .wrapper .ad {
