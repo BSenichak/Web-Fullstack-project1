@@ -1,9 +1,9 @@
 <form id="comment-form">
     <h2>Add Comment</h2>
     <label for="name">Author Name</label>
-    <input type="text" name="name">
+    <input type="text" name="name" id="name">
     <label for="comment">Comment</label>
-    <textarea name="comment"></textarea>
+    <textarea name="comment" id="comment"></textarea>
     <button type="submit">Add</button>
 </form>
 <script>
@@ -12,7 +12,7 @@
         let body = {
                 author: e.target.name.value,
                 comment: e.target.comment.value,
-                postid: window.location.pathname.split("/").pop()
+                post_id: window.location.pathname.split("/").pop()
             }
         fetch("/comment", {
             method: "POST",
